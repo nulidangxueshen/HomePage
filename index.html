@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页 | 优化少年</title>
+    <script>
+        function updateTime() {
+            const timeElement = document.getElementById('real-time');
+            const now = new Date();
+
+            
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const timeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            
+            
+            timeElement.textContent = timeString;
+        }
+
+        setInterval(updateTime, 1000);
+
+        updateTime();
+    </script>
+    <style>
+        
+        :root {
+            --primary: #2563eb;
+            --primary-soft: #eff6ff;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --bg-page: #f8fafc;
+            --card-white: #ffffff;
+            --gold: #fef3c7; --gold-text: #92400e;
+            --silver: #f1f5f9; --silver-text: #475569;
+            --bronze: #ffedd5; --bronze-text: #9a3412;
+            
+            
+            --ccf-a: #f80744; --ccf-b: #ebae08; --ccf-c: #0cb447; --ccf-n: #475569;
+            --sci-1: #ea580c; --sci-2: #0891b2; --sci-3: #4f46e5; --sci-4: #64748b;
+            --top-1: #c00707;
+        }
+
+       
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', -apple-system, system-ui, "PingFang SC", sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-page);
+            scroll-behavior: smooth;
+        }
+
+       
+        nav {
+            position: sticky; top: 0; background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px); border-bottom: 1px solid #e2e8f0;
+            z-index: 1000; padding: 12px 0;
+        }
+        .nav-inner {
+            max-width: 1050px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center; padding: 0 20px;
+        }
+        .nav-logo { font-weight: 800; font-size: 1.25rem; color: var(--text-dark); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: var(--text-gray); margin-left: 18px; font-weight: 500; font-size: 1.0rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        .container { max-width: 1050px; margin: 0 auto; padding: 40px 20px; }
+        section { margin-bottom: 60px; scroll-margin-top: 80px; }
+
+        .section-title {
+            font-size: 1.8rem; margin-bottom: 30px; display: flex; align-items: center;
+        }
+        .section-title::after {
+            content: ""; flex: 1; height: 1px; background: #e2e8f0; margin-left: 20px;
+        }
+
+       
+        .intro-h1 { font-size: 2.8rem; margin-bottom: 10px; background: linear-gradient(to right, #000000, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .contact-btn {
+            display: inline-block; padding: 8px 16px; border-radius: 8px; border: 1px solid #e2e8f0;
+            text-decoration: none; color: var(--text-gray); margin: 10px 8px 0 0; font-size: 1.0rem; transition: 0.3s; font-weight: bold;
+        }
+        .contact-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-soft); }
+
+        
+        .edu-card { background: var(--card-white); padding: 25px; border-radius: 12px; margin-bottom: 15px; border: 1px solid #f1f5f9; display: flex; justify-content: space-between; }
+
+        
+        .paper-item { padding: 20px; border-bottom: 1px solid #f1f5f9; position: relative; }
+        .paper-item:last-child { border-bottom: none; }
+        .paper-title { font-weight: 700; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 8px; display: block; }
+        .paper-venue { color: var(--text-gray); font-weight: 500; font-size: 0.9rem; margin-top: 8px; display: flex; gap: 8px; align-items: center; }
+        .tag { padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; color: #fff; display: inline-block; text-transform: uppercase; }
+        .tag-ccf-a { background: var(--ccf-a); } .tag-ccf-b { background: var(--ccf-b); } .tag-ccf-c { background: var(--ccf-c); } .tag-ccf-n { background: var(--ccf-n); }
+        .tag-sci-1 { background: var(--sci-1); } .tag-sci-2 { background: var(--sci-2); } .tag-sci-3 { background: var(--sci-3); } .tag-sci-4 { background: var(--sci-4); }
+        .tag-top-1 { background: var(--top-1); }
+
+       
+        .table-container { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 18px; text-align: center; font-size: 0.9rem; font-weight: 700; color: #ffffff; text-transform: uppercase; letter-spacing: 0.08em; }
+        td { padding: 16px; border-top: 1px solid #f1f5f9; text-align: center; font-size: 0.95rem; color: var(--text-dark); }
+        .index-col { width: 80px; color: var(--primary); font-weight: 800; font-family: 'JetBrains Mono', monospace; }
+        .badge { padding: 6px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: bold; display: inline-block; }
+        .gold { background: var(--gold); color: var(--gold-text); }
+        .silver { background: var(--silver); color: var(--silver-text); }
+        .bronze { background: var(--bronze); color: var(--bronze-text); }
+
+        
+        .achieve-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .achieve-card { background: white; padding: 20px; border-radius: 12px; border: 1px dashed #cbd5e1; }
+
+
+        .list-unstyled { list-style: none; }
+        .list-unstyled li { margin-bottom: 12px; padding-left: 20px; position: relative; }
+        .list-unstyled li::before { content: "•"; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
+        .item-description { font-size: 0.85rem; color: var(--text-gray); margin-top: 4px; display: block; }
+
+        .block-h3-v2 {
+            border-left: 6px solid #3182ce;
+            background-color: #ebf8ff; 
+            padding: 10px 15px;
+            color: #2c5282;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        footer { text-align: center; padding: 60px; color: var(--text-gray); font-size: 0.9rem; }
+
+        #real-time {
+            font-weight: 600;     
+            color: #4a5568;        
+            font-family: monospace; 
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">优化少年</a>
+        <div class="nav-links">
+            <a href="#about">简介</a>
+            <a href="#edu">教育背景</a>
+            <a href="#work">工作经历</a>
+            <a href="#tech-awards">科教奖励</a>
+            <a href="#projects">科研项目</a>
+            <a href="#papers">学术论文</a>
+            <a href="#awards">学科竞赛</a>
+            <a href="#honors">个人荣誉</a>
+            <a href="#teaching-project">教学项目</a>
+            <a href="#teaching-class">教学课程</a>
+            <a href="#mentoring">学生培养</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    
+    <section id="about">
+        <div class="profile-box" style="background: var(--card-white); border-radius: 24px; padding: 40px; display: grid; grid-template-columns: 240px 1fr; gap: 40px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); align-items: center;">
+            <img src="hpc_bhd.jpg" alt="你的照片" style="width: 100%; border-radius: 18px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <div>
+                <h1 class="intro-h1">边浩东</h1>
+                <p style="font-size: 1.2rem; color: var(--text-gray); margin-bottom: 20px;">青海大学 · 计算机技术与应用学院 · 讲师</p>
+                <p>主要研究方向包括<strong>高性能计算、稀疏数值计算性能优化、大规模科学计算软件性能优化、类脑计算软件性能优化</strong>。入选2024年“青海省昆仑英才·高端创新创业人才”培养计划（拔尖人才），曾获2024年青海省自然科学奖三等奖、2025年青海省教学成果奖一等奖。目前主持国家重点研发计划子课题一项、光合基金横向项目一项，相关研究成果以第一作者发表于PPoPP、SPE、CCGRID、FGCS等CCF推荐国际会议与期刊。</p>
+                <div style="margin-top: 15px;">
+                    <a href="https://scholar.google.com/citations?user=WDasJ-wAAAAJ&hl=zh-CN" class="contact-btn">Google Scholar</a>
+                    <a href="https://github.com/nulidangxueshen" class="contact-btn">GitHub</a>
+                    <a href="https://www.zhihu.com/people/hpc_bhd" class="contact-btn">Zhi Hu</a>
+                    <a href="mailto:hpc_bhd@163.com" class="contact-btn">Email</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="edu">
+        <h2 class="section-title">教育背景</h2>
+        <div class="edu-card">
+            <div><strong>清华大学</strong> · 计算机科学与技术 · 工学博士</div>
+            <span class="text-gray">2025.09 - 至今</span>
+        </div>
+        <div class="edu-card">
+            <div><strong>青海大学</strong> · 计算机技术 · 工程硕士</div>
+            <span class="text-gray">2018.09 - 2021.06</span>
+        </div>
+        <div class="edu-card">
+            <div><strong>安徽工程大学</strong> · 计算机科学与技术 · 工学学士</div>
+            <span class="text-gray">2014.09 - 2018.06</span>
+        </div>
+    </section>
+
+    <section id="work">
+        <h2 class="section-title">工作经历</h2>
+        <div class="edu-card">
+            <div>
+                <strong>青海大学</strong> · 计算机技术与应用学院 · 讲师
+                <span class="item-description">承担教学、行政任务，从事高性能计算相关科研。</span>
+            </div>
+            <span class="text-gray">2022.09 - 至今</span>
+        </div>
+        <div class="edu-card">
+            <div>
+                <strong>北京旷视科技有限公司</strong> · 资深研发工程师
+                <span class="item-description">参与移动终端相关应用的性能优化。</span>
+            </div>
+            <span class="text-gray">2022.06 - 2022.09</span>
+        </div>
+        <div class="edu-card">
+            <div>
+                <strong>北京清醒异构科技有限公司</strong> · 高级研发工程师
+                <span class="item-description">领导团队从事稀疏算子库优化、图像去畸变在飞腾平台的性能优化等</span>
+            </div>
+            <span class="text-gray">2021.06 - 2022.05</span>
+        </div>
+    </section>
+
+    <section id="tech-awards">
+        <h2 class="section-title">科教奖励</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>奖励/荣誉名称</th>
+                        <th>获奖年份</th>
+                        <th>等级/称号</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="index-col">01</td><td>青海省自然科学奖</td><td>2024</td><td><span class="badge bronze">三等奖 (排名第5)</span></td></tr>
+                    <tr><td class="index-col">02</td><td>青海省教学成果奖</td><td>2025</td><td><span class="badge gold">一等奖 (排名第8)</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">科研项目</h2>
+        <div class="project-card" style="border-left: 4px solid var(--primary); background: #fff; padding: 20px; margin-bottom: 15px; border-radius: 0 12px 12px 0; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <p style="font-weight: bold;">国家重点研发计划（子课题）：面向高分辨区域模式的高可扩展并行及智能计算技术</p>
+                <p style="font-size: 0.85rem; color: var(--text-gray);">主持  |  45万元  |  2023.12 - 2026.12</p>
+            </div>
+            <span class="badge" style="background:#dcfce7; color:#166534;">在研</span>
+        </div>
+        
+        <div class="project-card" style="border-left: 4px solid var(--primary); background: #fff; padding: 20px; margin-bottom: 15px; border-radius: 0 12px 12px 0; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <p style="font-weight: bold;">青海省昆仑英才 · 高端创新创业人才 · 培养拔尖人才</p>
+                <p style="font-size: 0.85rem; color: var(--text-gray);">主持  |  20万元  |  2025.3 - 2028.3</p>
+            </div>
+            <span class="badge" style="background:#dcfce7; color:#166534;">在研</span>
+        </div>
+
+        <div class="project-card" style="border-left: 4px solid #cbd5e1; background: #fff; padding: 20px; margin-bottom: 15px; border-radius: 0 12px 12px 0; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <p style="font-weight: bold;">中科曙光-光合基金-横向：异构平台QuEST量子计算模拟器移植优化研究</p>
+                <p style="font-size: 0.85rem; color: var(--text-gray);">主持 | 8万 | 2024.07 - 2025.12</p>
+            </div>
+            <span class="badge" style="background:#f1f5f9; color:#475569;">结题</span>
+        </div>
+    </section>
+
+    <section id="papers">
+        <h2 class="section-title">学术论文</h2>
+
+        <h3 class="block-h3-v2">第一作者</h3>
+        <div style="background: white; border-radius: 12px; overflow: hidden; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+            <div class="paper-item">
+                <span class="paper-title">PANA: A Fine-Grained Runtime-Adaptive Load Balancing for Parallel SpMV on Multicore CPUs</span>
+                <p class="text-gray"><strong>Haodong Bian</strong>, Youhui Zhang, Xiang Fei, Jianqiang Huang, Xiaoying Wang.</p>
+                <div class="paper-venue">
+                    <span class="tag tag-ccf-a">CCF-A</span>
+                    <span>PPoPP 2026</span>
+                </div>
+            </div>
+            <div class="paper-item">
+                <span class="paper-title">PAS: A new powerful and simple quantum computing simulator</span>
+                <p class="text-gray"><strong>Haodong Bian</strong>, Jianqiang Huang, Jiahao Tang, Runting Dong, Li Wu, Xiaoying Wang.</p>
+                <div class="paper-venue">
+                    <span class="tag tag-ccf-b">CCF-B</span>
+                    <span class="tag tag-sci-4">SCI 4区</span>
+                    <span>SPE 2021</span>
+                </div>
+            </div>
+            <div class="paper-item">
+                <span class="paper-title">ALBUS: A method for efficiently processing SpMV using SIMD and Load balancing</span>
+                <p class="text-gray"><strong>Haodong Bian</strong>, Jianqiang Huang, Linbing Liu, Dongqiang Huang, Xiaoying Wang.</p>
+                <div class="paper-venue">
+                    <span class="tag tag-ccf-c">CCF-C</span>
+                    <span class="tag tag-sci-2">SCI 2区</span>
+                    <span class="tag tag-top-1">TOP</span>
+                    <span>FGCS 2021</span>
+                </div>
+            </div>
+            <div class="paper-item">
+                <span class="paper-title">CSR2: A New Format for SIMD-accelerated SpMV</span>
+                <p class="text-gray"><strong>Haodong Bian</strong>, Jianqiang Huang, Runting Dong, Linbing Liu, Xiaoying Wang.</p>
+                <div class="paper-venue">
+                    <span class="tag tag-ccf-c">CCF-C</span>
+                    <span>CCGRID 2020</span>
+                </div>
+            </div>
+            <div class="paper-item">
+                <span class="paper-title">HpQC: A New Efficient Quantum Computing Simulator</span>
+                <p class="text-gray"><strong>Haodong Bian</strong>, Jianqiang Huang, Runting Dong, Yuluo Guo, Xiaoying Wang.</p>
+                <div class="paper-venue">
+                    <span class="tag tag-ccf-c">CCF-C</span>
+                    <span>ICA3PP 2020</span>
+                </div>
+            </div>
+
+            <div class="paper-item">
+                <span class="paper-title">A simple and efficient storage format for SIMD-accelerated SpMV</span>
+                <p class="text-gray"><strong>Haodong Bian</strong>, Jianqiang Huang, Runting Dong, Yuluo Guo, Dongqiang Huang, Xiaoying Wang.</p>
+                <div class="paper-venue">
+                    <span class="tag tag-ccf-n">CCF-N</span>
+                    <span class="tag tag-sci-3">SCI 3区</span>
+                    <span>Cluster Computing 2021</span>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="block-h3-v2">通讯作者</h3>
+        <div style="background: white; border-radius: 12px; overflow: hidden; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+            <div class="paper-item">
+                <span class="paper-title">Research on Parallel Weighted Back-Projection Algorithm on Multi-CPU</span>
+                <p class="text-gray">Kaige Zheng, Kuangzheng Wu, Yu Yao, <strong>Haodong Bian*</strong>, Jianqiang Huang, Xiaoying Wang.</p>
+                <div class="paper-venue">
+                    <span class="tag tag-ccf-c">CCF-C</span>
+                    <span>ICIC 2025</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="awards">
+        <h2 class="section-title">学科竞赛</h2>
+        <h3 class="block-h3-v2">指导老师</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>赛事名称</th>
+                        <th>获奖年份</th>
+                        <th>奖项等级</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="index-col">01</td><td>第五届线性解法器算法与性能优化竞赛（SolverChallenge）（Solo）</td><td>2025</td><td><span class="badge silver">全国二等奖</span></td></tr>
+                    <tr><td class="index-col">02</td><td>ASC世界大学生超级计算机竞赛</td><td>2025</td><td><span class="badge silver">全国二等奖</span></td></tr>
+                    <tr><td class="index-col">03</td><td>全国大学生计算机系统能力大赛-智能计算创新设计赛（先导杯）（Solo）</td><td>2025</td><td><span class="badge bronze">全国三等奖</span></td></tr>
+                    <tr><td class="index-col">04</td><td>ASC世界大学生超级计算机竞赛</td><td>2024</td><td><span class="badge gold">全国一等奖</span></td></tr>
+                    <tr><td class="index-col">05</td><td>MCC海洋计算挑战赛 （Solo）</td><td>2024</td><td><span class="badge silver">全国二等奖 (亚军)</span></td></tr>
+                    <tr><td class="index-col">06</td><td>中国高校计算机大赛（团体程序设计天梯赛）</td><td>2024</td><td><span class="badge silver">全国二等奖</span></td></tr>
+                    <tr><td class="index-col">07</td><td>第四届线性解法器算法与性能优化竞赛（SolverChallenge）（Solo）</td><td>2024</td><td><span class="badge bronze">全国三等奖</span></td></tr>
+                    <tr><td class="index-col">08</td><td>第二届开放原子大赛（Tecorigin算子开发任务挑战赛）（Solo）</td><td>2024</td><td><span class="badge bronze">全国三等奖</span></td></tr>
+                    <tr><td class="index-col">09</td><td>The 2023 ICPC China Silk Road National Invitational Programming Contest</td><td>2023</td><td><span class="badge gold">全国金奖 (Gold)</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <figcaption style="font-size: 1rem; color: gray; margin-top: 5px; margin-left: 10px; font-weight: bold;">
+            注：Solo 指比赛虽为团队赛制，但我们的参赛队伍中仅有1个学生参赛。
+        </figcaption>
+
+        <h3 class="block-h3-v2">本人参赛</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>赛事名称</th>
+                        <th>获奖年份</th>
+                        <th>奖项等级</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="index-col">01</td><td>第十届     PAC   并行应用挑战赛全国总决赛（Solo）</td><td>2022</td><td><span class="badge silver">全国二等奖（前三）</span></td></tr>
+                    <tr><td class="index-col">02</td><td>第三届    IPCC   并行应用挑战赛全国总决赛（Solo）</td><td>2022</td><td><span class="badge bronze">教育基金奖（第九）</span></td></tr>
+                    <tr><td class="index-col">03</td><td>第四届     CPC   国产CPU并行应用挑战赛全国总决赛（Solo）</td><td>2022</td><td><span class="badge bronze">全国16强</span></td></tr>
+                    <tr><td class="index-col">04</td><td>第二届     PRA   先导杯并行应用大奖赛全国总决赛—SpMV赛道（Solo） </td><td>2021</td><td><span class="badge bronze">全国8强</span></td></tr>
+                    <tr><td class="index-col">05</td><td>第十七届 “华为杯” 中国研究生数学建模竞赛</td><td>2020</td><td><span class="badge bronze">全国三等奖</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <figcaption style="font-size: 1rem; color: gray; margin-top: 5px; margin-left: 10px; font-weight: bold;">
+            注：Solo 指比赛虽为团队赛制，但本人以 Solo 形式独立完成。
+        </figcaption>
+    </section>
+
+    <section id="honors">
+        <h2 class="section-title">个人荣誉</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>荣誉名称</th>
+                        <th>荣获年份</th>
+                        <th>荣誉称号</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="index-col">01</td><td>               腾讯犀牛鸟开源人才培养计划               </td><td>2025</td><td><span class="badge gold">优秀指导老师</span></td></tr>
+                    <tr><td class="index-col">02</td><td>            青海大学2021级本科生优秀毕业论文            </td><td>2025</td><td><span class="badge gold">优秀指导老师</span></td></tr>
+                    <tr><td class="index-col">03</td><td> 2023年青海大学“超级计算机竞赛团队”受记功嘉奖表彰（校级） </td><td>2023</td><td><span class="badge gold">集体嘉奖（排名第2）</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="teaching-project">
+        <h2 class="section-title">教学项目</h2>
+        <div class="edu-card" style="display: block; border-left: 4px solid #10b981;">
+            <ul class="list-unstyled">
+                <li>
+                    <strong>2025年青海大学大学生学科竞赛项目《ASC世界大学生超级计算机竞赛》</strong>
+                    <span class="item-description">项目主持 | 2025年1月 - 2025年12月 | 角色：组织并上手指导学生参加超算竞赛系列赛事</span>
+                </li>
+                <li>
+                    <strong>2025年青海大学SRT项目《开源大模型微调》</strong>
+                    <span class="item-description">指导老师 | 2025年1月 - 2025年12月 | 角色：提供必要资源、鼓励学生积极探索</span>
+                </li>
+                <li>
+                    <strong>2024年青海大学大学生创新训练计划项目《基于CPU平台的并行WBP加权背投影算法研究》</strong>
+                    <span class="item-description">指导老师 | 2024年11月 - 2025年6月 | 角色：指导学生研究该项目（包括代码指导和论文撰写）</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="teaching-class">
+        <h2 class="section-title">教学课程</h2>
+        <div class="edu-card" style="display: block; border-left: 4px solid #10b981;">
+            <ul class="list-unstyled">
+                <li>
+                    <strong>超算平台运维与开发</strong>
+                    <span class="item-description"> 春季学期 | 课程讲授（主讲）</span>
+                </li>
+                <li>
+                    <strong>并行计算</strong>
+                    <span class="item-description"> 秋季学期 | 课程讲授（主讲）</span>
+                </li>
+                <li>
+                    <strong>计算机系统平台</strong>
+                    <span class="item-description"> 春季学期 | 课程讲授（主讲）</span>
+                </li>
+                <li>
+                    <strong>信息技术导论</strong>
+                    <span class="item-description"> 秋季学期 | 课程讲授（主讲）</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="mentoring">
+        <h2 class="section-title">学生培养</h2>
+        <div class="edu-card" style="display: block; border-left: 4px solid #f59e0b;">
+            <ul class="list-unstyled">
+                <li>
+                    <strong>青海大学绿色算力虚拟班（公众号： HDACP）</strong>
+                    <span class="item-description"> 发起人&负责人 | 2024年4月25日成立 | 每年吸纳10-30名学员</span>
+                </li>
+                <li>
+                    <strong>本科生指导</strong>
+                    <span class="item-description">指导本科生数十名。</span>
+                </li>
+                <li>
+                    <strong>研究生指导</strong>
+                    <span class="item-description">目前指导硕士研究生3名，每年招1名硕士研究生（本人亲自指导）。</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<footer style="text-align: center; padding: 20px; border-top: 1px solid #e2e8f0;">
+    <p>&copy; 2020-<span id="year"></span> &nbsp; Bian Haodong · Qinghai University，Current Time：<span id="real-time">正在加载...</span></p>
+</footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>   
+
+</body>
+</html>
